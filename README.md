@@ -10,7 +10,7 @@
 
 ---
 
-## 📌 Descripción de la Aplicación
+##  Descripción de la Aplicación
 Esta aplicación móvil desarrollada en Flutter permite explorar el catálogo oficial de personajes de la serie animada **Rick and Morty** consumiendo en tiempo real la [API pública de Rick and Morty](https://rickandmortyapi.com/).
 
 La aplicación cuenta con paginación completa, filtrado local por nombre dentro de la página consultada, pantalla de detalle con atributos extendidos, gestión persistente de favoritos en almacenamiento local (`shared_preferences`), y manejo robusto de estados de interfaz (cargas, errores de red amigables con reintento y estados vacíos).
@@ -73,51 +73,3 @@ La aplicación cuenta con paginación completa, filtrado local por nombre dentro
 
 ---
 
-##  Estructura del Código
-
-```text
-lib/
-├── main.dart                          # Punto de entrada y configuración de MultiProvider
-├── models/
-│   ├── api_response.dart             # Modelos PageInfo y CharacterResponse
-│   └── character.dart                # Modelo Character con parser defensivo
-├── services/
-│   ├── api_service.dart              # Peticiones HTTP a la API de Rick and Morty
-│   └── favorites_service.dart        # Persistencia en SharedPreferences
-├── providers/
-│   ├── character_provider.dart       # Estado del catálogo, paginación y búsqueda
-│   └── favorites_provider.dart       # Estado reactivo y persistencia de favoritos
-├── screens/
-│   ├── character_list_screen.dart    # Catálogo inicial, buscador y controles de página
-│   ├── character_detail_screen.dart  # Detalle completo con datos adicionales
-│   └── favorites_screen.dart         # Listado de personajes guardados como favoritos
-└── widgets/
-    ├── character_card.dart           # Tarjeta individual con imagen y botón favorito
-    ├── network_error_widget.dart     # Vista para error de conexión con botón reintentar
-    └── status_badge.dart             # Insignia de estado (Vivo, Muerto, Desconocido)
-```
-
----
-
-##  Instrucciones para Ejecutar el Proyecto
-
-1. **Clonar el repositorio:**
-   ```bash
-   git clone https://github.com/Mauriciocoreas25/examen_practico_3.git
-   cd examen_practico_3
-   ```
-
-2. **Obtener las dependencias:**
-   ```bash
-   flutter pub get
-   ```
-
-3. **Ejecutar pruebas unitarias:**
-   ```bash
-   flutter test
-   ```
-
-4. **Correr la aplicación:**
-   ```bash
-   flutter run
-   ```
