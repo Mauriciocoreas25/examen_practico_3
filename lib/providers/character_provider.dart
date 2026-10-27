@@ -23,7 +23,6 @@ class CharacterProvider extends ChangeNotifier {
     loadPage(1);
   }
 
-  // Getters
   int get currentPage => _currentPage;
   int get totalPages => _totalPages;
   int get totalCharacters => _totalCharacters;
@@ -33,7 +32,6 @@ class CharacterProvider extends ChangeNotifier {
   String? get errorMessage => _errorMessage;
   String get searchQuery => _searchQuery;
 
-  /// Retorna la lista filtrada localmente dentro de la página actual (RF-03)
   List<Character> get displayedCharacters {
     final query = _searchQuery.trim().toLowerCase();
     if (query.isEmpty) {
@@ -44,10 +42,8 @@ class CharacterProvider extends ChangeNotifier {
     }).toList();
   }
 
-  /// Retorna todos los personajes de la página sin filtrar
   List<Character> get pageCharacters => _pageCharacters;
 
-  /// Carga una página específica de la API
   Future<void> loadPage(int page) async {
     _isLoading = true;
     _errorMessage = null;
@@ -70,32 +66,27 @@ class CharacterProvider extends ChangeNotifier {
     }
   }
 
-  /// Pasa a la siguiente página (RF-04)
   Future<void> nextPage() async {
     if (hasNext && !_isLoading) {
       await loadPage(_currentPage + 1);
     }
   }
 
-  /// Pasa a la página anterior (RF-04)
   Future<void> prevPage() async {
     if (hasPrev && !_isLoading && _currentPage > 1) {
       await loadPage(_currentPage - 1);
     }
   }
 
-  /// Reintenta la carga de la página actual ante fallo de red (RF-06)
   Future<void> retry() async {
     await loadPage(_currentPage);
   }
 
-  /// Modifica el filtro de búsqueda local (RF-03)
   void setSearchQuery(String query) {
     _searchQuery = query;
     notifyListeners();
   }
 
-  /// Limpia la búsqueda actual
   void clearSearch() {
     _searchQuery = '';
     notifyListeners();

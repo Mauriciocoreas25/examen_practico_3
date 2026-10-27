@@ -140,8 +140,6 @@ class CharacterDetailScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 14),
 
-                  // Datos adicionales requeridos por RF-02:
-                  // 1. Especie
                   _buildDetailTile(
                     icon: Icons.category_outlined,
                     label: 'Especie',

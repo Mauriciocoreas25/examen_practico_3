@@ -129,7 +129,6 @@ class CharacterCard extends StatelessWidget {
                 ),
               ),
             ),
-            // Botón de Favorito en tarjeta (RF-05)
             Padding(
               padding: const EdgeInsets.only(right: 8.0),
               child: IconButton(

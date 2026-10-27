@@ -40,7 +40,6 @@ class _CharacterListScreenState extends State<CharacterListScreen> {
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         actions: [
-          // Botón para acceder a la pantalla de Favoritos con contador
           Consumer<FavoritesProvider>(
             builder: (context, favoritesProvider, child) {
               return Stack(
@@ -91,8 +90,6 @@ class _CharacterListScreenState extends State<CharacterListScreen> {
       ),
       body: Column(
         children: [
-          // Barra de búsqueda local (RF-03)
-          // Usamos ValueListenableBuilder para el icono de limpiar sin reconstruir el TextField
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 10, 16, 6),
             child: ValueListenableBuilder<TextEditingValue>(
@@ -135,7 +132,6 @@ class _CharacterListScreenState extends State<CharacterListScreen> {
             ),
           ),
 
-          // Aviso explícito que indica que la búsqueda es local a la página actual (RF-03)
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 2.0),
             child: Row(
@@ -157,11 +153,9 @@ class _CharacterListScreenState extends State<CharacterListScreen> {
           ),
           const SizedBox(height: 6),
 
-          // Contenido principal (RF-01, RF-06)
           Expanded(
             child: Consumer<CharacterProvider>(
               builder: (context, characterProvider, child) {
-                // Estado de carga inicial o de cambio de página
                 if (characterProvider.isLoading) {
                   return const Center(
                     child: Column(
@@ -178,7 +172,6 @@ class _CharacterListScreenState extends State<CharacterListScreen> {
                   );
                 }
 
-                // Estado de error de conexión / API
                 if (characterProvider.errorMessage != null) {
                   return NetworkErrorWidget(
                     message: characterProvider.errorMessage!,
@@ -188,7 +181,6 @@ class _CharacterListScreenState extends State<CharacterListScreen> {
 
                 final displayedCharacters = characterProvider.displayedCharacters;
 
-                // Estado de sin coincidencias de búsqueda local
                 if (displayedCharacters.isEmpty) {
                   return SingleChildScrollView(
                     child: Center(
@@ -232,7 +224,6 @@ class _CharacterListScreenState extends State<CharacterListScreen> {
                   );
                 }
 
-                // Lista de personajes
                 return RefreshIndicator(
                   onRefresh: () => characterProvider.retry(),
                   child: ListView.builder(
@@ -259,8 +250,6 @@ class _CharacterListScreenState extends State<CharacterListScreen> {
             ),
           ),
 
-          // Barra inferior de paginación (RF-04)
-          // Se oculta limpiamente cuando el teclado está abierto para no sobrecargar el espacio
           if (!isKeyboardOpen)
             Consumer<CharacterProvider>(
               builder: (context, characterProvider, child) {
@@ -279,7 +268,6 @@ class _CharacterListScreenState extends State<CharacterListScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      // Botón Anterior
                       ElevatedButton.icon(
                         onPressed: characterProvider.hasPrev
                             ? () {
@@ -297,7 +285,6 @@ class _CharacterListScreenState extends State<CharacterListScreen> {
                         ),
                       ),
 
-                      // Indicador de página actual y total
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                         decoration: BoxDecoration(
@@ -313,7 +300,6 @@ class _CharacterListScreenState extends State<CharacterListScreen> {
                         ),
                       ),
 
-                      // Botón Siguiente
                       ElevatedButton(
                         onPressed: characterProvider.hasNext
                             ? () {
